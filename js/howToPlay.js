@@ -48,7 +48,6 @@ HowState.prototype = {
 		var playButton = this.game.add.button(1201, 592, 'contButton', this.menuScreen, this);
 		this.touch1 = this.game.input.addPointer();
 		this.touch2 = this.game.input.addPointer();
-		
 	},
 	update: function(){
 		this.game.physics.arcade.collide(this.player, this.blockTile);
@@ -57,19 +56,33 @@ HowState.prototype = {
 		this.left.loadTexture('left');
 		this.right.loadTexture('right');
 		this.up.loadTexture('up');
+		//touch
+		if(this.game.input.pointer1.isDown){
+			   this.player.scale.x = -1;
+			   this.player.body.velocity.x = -180;
+			   this.player.animations.play('walk');
+			   this.left.loadTexture('left2');
+		   }
+		   if (this.game.input.pointer2.isDown && this.player.body.onFloor()){
+			this.player.body.acceleration.y = -50000000;
+			this.up.loadTexture('up2');
+			this.jumpTimer.start();
+		}
+		//
 		if(this.cursors.left.isDown){
 			   this.player.scale.x = -1;
 			   this.player.body.velocity.x = -180;
 			   this.player.animations.play('walk');
 			   this.left.loadTexture('left2');
 		   }
-		else if(this.cursors.right.isDown || this.touch1.isDown){
+		else if(this.cursors.right.isDown){
 			this.player.scale.x = 1;
 			this.player.body.velocity.x = 180;
 			this.right.loadTexture('right2');
 			this.player.animations.play('walk');
 		}
-		if ((this.cursors.up.isDown || this.touch1.isDown) && this.player.body.onFloor()){
+		
+		if (this.cursors.up.isDown && this.player.body.onFloor()){
 			this.player.body.acceleration.y = -50000000;
 			this.up.loadTexture('up2');
 			this.jumpTimer.start();
