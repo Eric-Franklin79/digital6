@@ -58,10 +58,10 @@ HowState.prototype = {
 		this.up.loadTexture('up');
 		//touch
 		if(this.game.input.pointer1.isDown){
-			   this.player.scale.x = -1;
-			   this.player.body.velocity.x = -180;
+			   this.player.scale.x = 1;
+			   this.player.body.velocity.x = 180;
+			   this.right.loadTexture('right2');
 			   this.player.animations.play('walk');
-			   this.left.loadTexture('left2');
 		   }
 		   if (this.game.input.pointer2.isDown && this.player.body.onFloor()){
 			this.player.body.acceleration.y = -50000000;
