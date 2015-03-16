@@ -19,7 +19,7 @@ Level1State.prototype = {
    	        backgroundLayer.resizeWorld();
    	        
    	        //create dude
-   	        this.player = this.game.add.sprite(61, 480, 'player', 0);
+   	        this.player = this.game.add.sprite(91, 480, 'player', 0);
    	        this.game.physics.arcade.enable(this.player);
    	        this.player.animations.add('walk', [1,0], 10);
    	        this.player.body.maxVelocity.x = 180;
@@ -61,7 +61,7 @@ Level1State.prototype = {
 		this.game.physics.arcade.overlap(this.player, this.batteries, this.powerUp, null, this);
 		this.player.body.velocity.x = 0;
 		this.playerToken.cameraOffset.x += (this.player.x - this.pX)/15;
-		this.enemyToken.cameraOffset.x += .2;
+		this.enemyToken.cameraOffset.x += .15;
 		if(this.cursors.left.isDown){
 			   this.player.scale.x = -1;
 			   this.player.body.velocity.x = -180;
@@ -77,6 +77,9 @@ Level1State.prototype = {
 			this.jumpTimer.start();
 		}
 		this.pX = this.player.x;
+		if(this.playerToken.x < this.enemyToken.x){
+			this.game.state.start("gameOver");
+		}
 		if(this.player.x > 12119){
 			this.game.state.start("win");
 		}
