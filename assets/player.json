@@ -1,0 +1,28 @@
+{"frames": {
+
+"dude.png":
+{
+	"frame": {"x":2,"y":2,"w":60,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":120},
+	"sourceSize": {"w":60,"h":120}
+},
+"dude02.png":
+{
+	"frame": {"x":2,"y":124,"w":60,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":120},
+	"sourceSize": {"w":60,"h":120}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "player.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":246},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:657cf35007b1d366e9909f0829f9b269:7f0e438da5b4abcfc9afbc68bba5a7fd:86d5339b780aedd87b35e2b7c0a7e11b$"
+}
+}
