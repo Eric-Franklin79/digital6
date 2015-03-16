@@ -23,7 +23,14 @@ PreloadState.prototype = {
 		this.game.load.atlasJSONHash('battery', 'assets/battery.png', 'assets/battery.json');
 		this.game.load.image('endScreen', 'assets/endScreen.png');
 		this.game.load.image('contButton', 'assets/contButton.png');
-
+		this.game.load.tilemap('howToTileMap', 'assets/howTo.json', null, Phaser.Tilemap.TILED_JSON);
+		this.game.load.image('howToScreen', 'assets/howToScreen.png');
+		this.game.load.image('right', 'assets/right.png');
+		this.game.load.image('left', 'assets/left.png');
+		this.game.load.image('up', 'assets/up.png');
+		this.game.load.image('right2', 'assets/right2.png');
+		this.game.load.image('left2', 'assets/left2.png');
+		this.game.load.image('up2', 'assets/up2.png');
 	},
 	create: function(){
 		this.game.state.start("menu");

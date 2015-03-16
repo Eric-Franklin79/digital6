@@ -2,7 +2,7 @@
 var Level1State = function(game){
 //variables go here
 var map, blockTile, player, cursors, jumpTimer, levelBar, playerToken, enemyToken, batteries;
-var scoreText;
+var scoreText, touch1, touch2;
 var pX = 0, score = 0;
 }
 
@@ -54,6 +54,8 @@ Level1State.prototype = {
 		this.scoreText.fixedToCamera = true;
 		this.pX = this.player.x;
 		this.score = 0;
+		this.touch1 = this.game.input.addPointer();
+		this.touch2 = this.game.input.addPointer();
 		
 	},
 	update: function(){
@@ -67,12 +69,12 @@ Level1State.prototype = {
 			   this.player.body.velocity.x = -180;
 			   this.player.animations.play('walk');
 		   }
-		else if(this.cursors.right.isDown){
+		else if(this.cursors.right.isDown || this.touch1.isDown){
 			this.player.scale.x = 1;
 			this.player.body.velocity.x = 180;
 			this.player.animations.play('walk');
 		}
-		if (this.cursors.up.isDown && this.player.body.onFloor()){
+		if ((this.cursors.up.isDown || this.touch2.isDown) && this.player.body.onFloor()){
 			this.player.body.acceleration.y = -50000000;
 			this.jumpTimer.start();
 		}
