@@ -92,7 +92,7 @@ Level1State.prototype = {
 			this.game.state.start("gameOver");
 		}
 		if(this.player.x > 12119){
-			this.game.state.start("win");
+			this.game.state.start("win", true, false, this.score);
 		}
 	},
 	fall: function(){

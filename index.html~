@@ -11,6 +11,8 @@
     <script src="js/scene1.js"></script>
     <script src="js/level1.js"></script>
     <script src="js/gameOver.js"></script>
+    <script src="js/win.js"></script>
+    
 
 <style>
 body
@@ -33,6 +35,8 @@ body
     	    	    game.state.add('scene1', Scene1State);
     	    	    game.state.add('level1', Level1State);
     	    	    game.state.add('gameOver', GameOverState);
+    	    	    game.state.add('win', WinState);
+    	    	    
     	    	    
     	    	    game.state.start('boot');
     	    	    })();

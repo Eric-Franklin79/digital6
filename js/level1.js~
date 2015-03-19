@@ -2,6 +2,7 @@
 var Level1State = function(game){
 //variables go here
 var map, blockTile, player, cursors, jumpTimer, levelBar, playerToken, enemyToken, batteries;
+var scoreText;
 var pX = 0, score = 0;
 }
 
@@ -18,11 +19,12 @@ Level1State.prototype = {
    	        backgroundLayer.resizeWorld();
    	        
    	        //create dude
-   	        this.player = this.game.add.sprite(61, 480, 'player', 0);
+   	        this.player = this.game.add.sprite(91, 480, 'player', 0);
    	        this.game.physics.arcade.enable(this.player);
    	        this.player.animations.add('walk', [1,0], 10);
    	        this.player.body.maxVelocity.x = 180;
    	        this.player.body.maxVelocity.y = 180;
+   	        this.player.anchor.setTo(0.5, 0.5);
    	        
    	        //create battery objects
    	        this.batteries = this.game.add.group();
@@ -46,25 +48,39 @@ Level1State.prototype = {
 		this.enemyToken.fixedToCamera = true;
 		this.game.physics.arcade.enable(this.playerToken);
 		this.game.physics.arcade.enable(this.enemyToken);
+		//
+		var styleS = { font: "bold 30px Verdana", fill: "#FFFFFF", align: "left" };
+		this.scoreText = this.game.add.text(10, 60, 'Score: 0' , styleS);
+		this.scoreText.fixedToCamera = true;
+		this.pX = this.player.x;
+		this.score = 0;
 		
 	},
 	update: function(){
 		this.game.physics.arcade.collide(this.player, this.blockTile);
 		this.game.physics.arcade.overlap(this.player, this.batteries, this.powerUp, null, this);
 		this.player.body.velocity.x = 0;
-		this.playerToken.body.velocity.x = 0;
-		//this.player.body.acceleration.y = 30;
+		this.playerToken.cameraOffset.x += (this.player.x - this.pX)/15;
+		this.enemyToken.cameraOffset.x += .15;
+		//
+		if(this.game.input.pointer1.isDown){
+			this.player.scale.x = 1;
+			this.player.body.velocity.x = 180;
+			this.player.animations.play('walk');
+		   }
+		   if (this.game.input.pointer2.isDown && this.player.body.onFloor()){
+			this.player.body.acceleration.y = -50000000;
+			this.jumpTimer.start();
+		}
+		//
 		if(this.cursors.left.isDown){
+			   this.player.scale.x = -1;
 			   this.player.body.velocity.x = -180;
-			   this.playerToken.cameraOffset.x -= (this.player.x - 60)/1000;
 			   this.player.animations.play('walk');
-			   
 		   }
 		else if(this.cursors.right.isDown){
+			this.player.scale.x = 1;
 			this.player.body.velocity.x = 180;
-			
-			this.playerToken.cameraOffset.x += (this.player.x - this.pX)/1000;
-			
 			this.player.animations.play('walk');
 		}
 		if (this.cursors.up.isDown && this.player.body.onFloor()){
@@ -72,6 +88,12 @@ Level1State.prototype = {
 			this.jumpTimer.start();
 		}
 		this.pX = this.player.x;
+		if(this.playerToken.x < this.enemyToken.x){
+			this.game.state.start("gameOver");
+		}
+		if(this.player.x > 12119){
+			this.game.state.start("win");
+		}
 	},
 	fall: function(){
 		this.player.body.acceleration.y = 0;
@@ -82,8 +104,7 @@ Level1State.prototype = {
 	powerUp: function(player, battery){
 		battery.destroy();
 		this.score += 50;
-		
-		
+		this.scoreText.setText('Score: ' + String(this.score));
 		
 	}
 	

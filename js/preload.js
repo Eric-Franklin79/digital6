@@ -31,6 +31,8 @@ PreloadState.prototype = {
 		this.game.load.image('right2', 'assets/right2.png');
 		this.game.load.image('left2', 'assets/left2.png');
 		this.game.load.image('up2', 'assets/up2.png');
+		this.game.load.image('winScreen', 'assets/winScreen.png');
+		this.game.load.image('continuedButton', 'assets/continuedButton.png');
 	},
 	create: function(){
 		this.game.state.start("menu");
